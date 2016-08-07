@@ -42,6 +42,7 @@ import com.alibaba.rocketmq.remoting.netty.NettyServerConfig;
  * @since 2013-7-5
  */
 public class NamesrvController {
+	
     private static final Logger log = LoggerFactory.getLogger(LoggerName.NamesrvLoggerName);
     // Name Server配置
     private final NamesrvConfig namesrvConfig;

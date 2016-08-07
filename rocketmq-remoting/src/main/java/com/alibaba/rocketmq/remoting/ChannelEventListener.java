@@ -19,18 +19,36 @@ import io.netty.channel.Channel;
 
 
 /**
+ * @description 渠道事件监听器
  * @author shijia.wxr<vintage.wang@gmail.com>
  * @since 2013-7-13
  */
 public interface ChannelEventListener {
+	/**
+	 * @description  		链接渠道
+	 * @param remoteAddr	地址
+	 * @param channel		netty的渠道
+	 */
     void onChannelConnect(final String remoteAddr, final Channel channel);
 
-
+    /**
+     * @description 		关闭渠道
+     * @param remoteAddr	地址
+     * @param channel		netty的渠道
+     */
     void onChannelClose(final String remoteAddr, final Channel channel);
 
-
+    /**
+     * @description		 渠道异常处理
+     * @param remoteAddr 远程地址
+     * @param channel	 netty渠道
+     */
     void onChannelException(final String remoteAddr, final Channel channel);
 
-
+    /**
+     * @description     空闲的渠道
+     * @param remoteAddr
+     * @param channel
+     */
     void onChannelIdle(final String remoteAddr, final Channel channel);
 }

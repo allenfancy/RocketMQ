@@ -20,6 +20,8 @@ package com.alibaba.rocketmq.remoting.protocol;
  * @since 2013-7-13
  */
 public enum RemotingCommandType {
+	//请求命令
     REQUEST_COMMAND,
+    //响应命令
     RESPONSE_COMMAND;
 }

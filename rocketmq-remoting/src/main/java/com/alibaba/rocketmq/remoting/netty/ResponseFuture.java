@@ -25,19 +25,27 @@ import com.alibaba.rocketmq.remoting.protocol.RemotingCommand;
 
 
 /**
- * 异步请求应答封装
+ * @Description 请求应答封装
  * 
  * @author shijia.wxr<vintage.wang@gmail.com>
  * @since 2013-7-13
  */
 public class ResponseFuture {
+	
     private volatile RemotingCommand responseCommand;
+    //发布请求状态
     private volatile boolean sendRequestOK = true;
+    //抛出异常
     private volatile Throwable cause;
+    //
     private final int opaque;
+    //响应超时
     private final long timeoutMillis;
+    //调用应答回调接口
     private final InvokeCallback invokeCallback;
+    //开始的时间戳
     private final long beginTimestamp = System.currentTimeMillis();
+    //CountDownLatch同步计数类
     private final CountDownLatch countDownLatch = new CountDownLatch(1);
 
     // 保证信号量至多至少只被释放一次
@@ -55,7 +63,7 @@ public class ResponseFuture {
         this.once = once;
     }
 
-
+    //
     public void executeInvokeCallback() {
         if (invokeCallback != null) {
             if (this.executeCallbackOnlyOnce.compareAndSet(false, true)) {

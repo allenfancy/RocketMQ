@@ -30,27 +30,34 @@ import com.alibaba.rocketmq.remoting.protocol.RemotingCommand;
 
 
 /**
+ * @description 	使用Netty编码
  * @author shijia.wxr<vintage.wang@gmail.com>
  * @since 2013-7-13
  */
 public class NettyEncoder extends MessageToByteEncoder<RemotingCommand> {
+	
     private static final Logger log = LoggerFactory.getLogger(RemotingHelper.RemotingLogName);
 
     @Override
     public void encode(ChannelHandlerContext ctx, RemotingCommand remotingCommand, ByteBuf out)
             throws Exception {
         try {
+        	//从remotingCommand
+        	//编码头部
             ByteBuffer header = remotingCommand.encodeHeader();
             out.writeBytes(header);
+            //编码主题部分
             byte[] body = remotingCommand.getBody();
             if (body != null) {
                 out.writeBytes(body);
             }
         } catch (Exception e) {
+        	//将Channel的地址解析出来
             log.error("encode exception, " + RemotingHelper.parseChannelRemoteAddr(ctx.channel()), e);
             if (remotingCommand != null) {
                 log.error(remotingCommand.toString());
             }
+            //关闭Channel
             RemotingUtil.closeChannel(ctx.channel());
         }
     }

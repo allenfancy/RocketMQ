@@ -22,10 +22,18 @@ import com.alibaba.rocketmq.remoting.protocol.RemotingCommand;
 
 /**
  * Common remoting command processor
+ * 公用的远程命令处理器
  * @author shijia.wxr<vintage.wang@gmail.com>
  * @since 2013-7-13
  */
 public interface NettyRequestProcessor {
+	/**
+	 * @Description 远程命令请求
+	 * @param ctx
+	 * @param request
+	 * @return
+	 * @throws Exception
+	 */
     RemotingCommand processRequest(ChannelHandlerContext ctx, RemotingCommand request)
             throws Exception;
 }

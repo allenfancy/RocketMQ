@@ -17,6 +17,7 @@ import com.alibaba.rocketmq.remoting.protocol.RemotingCommand;
  * @since 2013-7-6
  */
 public class NettyConnectionTest {
+	
     public static RemotingClient createRemotingClient() {
         NettyClientConfig config = new NettyClientConfig();
         config.setClientChannelMaxIdleTimeSeconds(15);

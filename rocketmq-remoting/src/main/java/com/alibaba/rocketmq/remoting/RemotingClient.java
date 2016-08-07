@@ -34,30 +34,67 @@ import com.alibaba.rocketmq.remoting.protocol.RemotingCommand;
  */
 public interface RemotingClient extends RemotingService {
 
+	/*
+	 * 更新NameServer地址列表
+	 */
     public void updateNameServerAddressList(final List<String> addrs);
 
-
+    /*
+     * 获取NameServer地址类别
+     */
     public List<String> getNameServerAddressList();
 
-
+    /*
+     * 同步调用
+     */
     public RemotingCommand invokeSync(final String addr, final RemotingCommand request,
             final long timeoutMillis) throws InterruptedException, RemotingConnectException,
             RemotingSendRequestException, RemotingTimeoutException;
 
-
+    /**
+     * @description 			异步调用
+     * @param addr				请求地址
+     * @param request			远程请求协议
+     * @param timeoutMillis		超时时间
+     * @param invokeCallback	异步调用应答回调接口
+     * @throws InterruptedException
+     * @throws RemotingConnectException
+     * @throws RemotingTooMuchRequestException
+     * @throws RemotingTimeoutException
+     * @throws RemotingSendRequestException
+     */
     public void invokeAsync(final String addr, final RemotingCommand request, final long timeoutMillis,
             final InvokeCallback invokeCallback) throws InterruptedException, RemotingConnectException,
             RemotingTooMuchRequestException, RemotingTimeoutException, RemotingSendRequestException;
 
-
+   /**
+    * @description  									一种方式调用
+    * @param addr										地址
+    * @param request									远程请求协议
+    * @param timeoutMillis								链接超时时间
+    * @throws InterruptedException
+    * @throws RemotingConnectException
+    * @throws RemotingTooMuchRequestException
+    * @throws RemotingTimeoutException
+    * @throws RemotingSendRequestException
+    */
     public void invokeOneway(final String addr, final RemotingCommand request, final long timeoutMillis)
             throws InterruptedException, RemotingConnectException, RemotingTooMuchRequestException,
             RemotingTimeoutException, RemotingSendRequestException;
 
-
+    /**
+     * @description 		注册处理器
+     * @param requestCode 	请求Code
+     * @param processor		Netty请求处理器
+     * @param executor		执行线程池
+     */
     public void registerProcessor(final int requestCode, final NettyRequestProcessor processor,
             final ExecutorService executor);
 
-
+    /**
+     * @description 通道是否可以写
+     * @param addr	地址
+     * @return 
+     */
     public boolean isChannelWriteable(final String addr);
 }

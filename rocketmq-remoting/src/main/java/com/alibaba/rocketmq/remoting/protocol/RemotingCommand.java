@@ -33,10 +33,16 @@ import com.alibaba.rocketmq.remoting.exception.RemotingCommandException;
  * 
  * @author shijia.wxr<vintage.wang@gmail.com>
  * @since 2013-7-13
+ * 
+ * transient关键字：
+ * 在序列化的情况下，transient修饰的字段，不会在网络中传输其值
  */
 public class RemotingCommand {
+	
+	//远程版本Key
     public static String RemotingVersionKey = "rocketmq.remoting.version";
     private static volatile int ConfigVersion = -1;
+    //请求ID
     private static AtomicInteger RequestId = new AtomicInteger(0);
 
     private static final int RPC_TYPE = 0; // 0, REQUEST_COMMAND
@@ -55,11 +61,12 @@ public class RemotingCommand {
     private int flag = 0;
     private String remark;
     private HashMap<String, String> extFields;
-
+    //不序列化
     private transient CommandCustomHeader customHeader;
 
     /**
      * Body 部分
+     * 不序列化
      */
     private transient byte[] body;
 
@@ -67,7 +74,12 @@ public class RemotingCommand {
     protected RemotingCommand() {
     }
 
-
+    /**
+     * @description 创建请求命令
+     * @param code
+     * @param customHeader
+     * @return
+     */
     public static RemotingCommand createRequestCommand(int code, CommandCustomHeader customHeader) {
         RemotingCommand cmd = new RemotingCommand();
         cmd.setCode(code);
@@ -76,7 +88,11 @@ public class RemotingCommand {
         return cmd;
     }
 
-
+    /**
+     * @description	创建响应命令
+     * @param classHeader
+     * @return
+     */
     public static RemotingCommand createResponseCommand(Class<? extends CommandCustomHeader> classHeader) {
         RemotingCommand cmd =
                 createResponseCommand(RemotingSysResponseCode.SYSTEM_ERROR, "not set any response code",
@@ -85,7 +101,12 @@ public class RemotingCommand {
         return cmd;
     }
 
-
+    /**
+     * @Description 创建响应命令
+     * @param code 
+     * @param remark
+     * @return
+     */
     public static RemotingCommand createResponseCommand(int code, String remark) {
         return createResponseCommand(code, remark, null);
     }
@@ -118,12 +139,16 @@ public class RemotingCommand {
         return cmd;
     }
 
-
+    /**
+     * 
+     * @param cmd RemotingCommand 引用传递
+     */
     private static void setCmdVersion(RemotingCommand cmd) {
         if (ConfigVersion >= 0) {
             cmd.setVersion(ConfigVersion);
         }
         else {
+        	//获取版本
             String v = System.getProperty(RemotingVersionKey);
             if (v != null) {
                 int value = Integer.parseInt(v);
@@ -303,7 +328,7 @@ public class RemotingCommand {
         return result;
     }
 
-
+    //编码头部信息
     public ByteBuffer encodeHeader() {
         return encodeHeader(this.body != null ? this.body.length : 0);
     }
@@ -367,16 +392,17 @@ public class RemotingCommand {
     }
 
 
-    public void markResponseType() {
+  
+    public void markResponseType() { //标识响应类型
         int bits = 1 << RPC_TYPE;
         this.flag |= bits;
     }
 
 
     @JSONField(serialize = false)
-    public boolean isResponseType() {
+    public boolean isResponseType() { //忽略字段不被序列化
         int bits = 1 << RPC_TYPE;
-        return (this.flag & bits) == bits;
+        return (this.flag & bits) == bits; //是否响应类型
     }
 
 
@@ -487,7 +513,11 @@ public class RemotingCommand {
         return RequestId.incrementAndGet();
     }
 
-
+    /**
+     * @Description 添加字段
+     * @param key
+     * @param value
+     */
     public void addExtField(String key, String value) {
         if (null == extFields) {
             extFields = new HashMap<String, String>();

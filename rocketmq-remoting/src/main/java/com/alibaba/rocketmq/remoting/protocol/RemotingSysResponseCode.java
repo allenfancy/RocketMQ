@@ -1,5 +1,9 @@
 package com.alibaba.rocketmq.remoting.protocol;
-
+/**
+ * @description	远程系统请求Code
+ * @author allen
+ *
+ */
 public class RemotingSysResponseCode {
     // 成功
     public static final int SUCCESS = 0;

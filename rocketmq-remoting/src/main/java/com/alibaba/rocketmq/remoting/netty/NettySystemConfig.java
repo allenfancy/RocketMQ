@@ -1,15 +1,20 @@
 package com.alibaba.rocketmq.remoting.netty;
-
+/**
+ * @description Netty系统配置
+ * @author allen
+ *
+ */
 public class NettySystemConfig {
+	
     public static final String SystemPropertyNettyPooledByteBufAllocatorEnable =
             "com.rocketmq.remoting.nettyPooledByteBufAllocatorEnable";
-    public static boolean NettyPooledByteBufAllocatorEnable = //
+    public static boolean NettyPooledByteBufAllocatorEnable = // Netty池字节缓存是否允许分配为false
             Boolean
                 .parseBoolean(System.getProperty(SystemPropertyNettyPooledByteBufAllocatorEnable, "false"));
 
     public static final String SystemPropertySocketSndbufSize = //
             "com.rocketmq.remoting.socket.sndbuf.size";
-    public static int SocketSndbufSize = //
+    public static int SocketSndbufSize = //Socket发送缓冲区的大小65535
             Integer.parseInt(System.getProperty(SystemPropertySocketSndbufSize, "65535"));
 
     public static final String SystemPropertySocketRcvbufSize = //

@@ -38,14 +38,18 @@ public interface RemotingServer extends RemotingService {
     /**
      * 注册请求处理器，ExecutorService必须要对应一个队列大小有限制的阻塞队列，防止OOM
      * 
-     * @param requestCode
+     * @param requestCode  响应CODE
      * @param processor
      * @param executor
      */
     public void registerProcessor(final int requestCode, final NettyRequestProcessor processor,
             final ExecutorService executor);
 
-
+    /**
+     * 注册默认请求处理器，ExecutorService必须要对应一个队列大小有限制的阻塞队列，防止OOM
+     * @param processor
+     * @param executor
+     */
     public void registerDefaultProcessor(final NettyRequestProcessor processor, final ExecutorService executor);
 
 
@@ -56,20 +60,55 @@ public interface RemotingServer extends RemotingService {
      */
     public int localListenPort();
 
-
+    /**
+     * @description  		根据请求的code获取 处理器对
+     * @param requestCode
+     * @return
+     */
     public Pair<NettyRequestProcessor, ExecutorService> getProcessorPair(final int requestCode);
 
 
+    /**
+     * @Description
+     * 同步
+     * @param channel
+     * @param request
+     * @param timeoutMillis
+     * @return
+     * @throws InterruptedException
+     * @throws RemotingSendRequestException
+     * @throws RemotingTimeoutException
+     */
     public RemotingCommand invokeSync(final Channel channel, final RemotingCommand request,
             final long timeoutMillis) throws InterruptedException, RemotingSendRequestException,
             RemotingTimeoutException;
 
-
+    /**
+     * @Description
+     *  异步
+     * @param channel
+     * @param request
+     * @param timeoutMillis
+     * @param invokeCallback
+     * @throws InterruptedException
+     * @throws RemotingTooMuchRequestException
+     * @throws RemotingTimeoutException
+     * @throws RemotingSendRequestException
+     */
     public void invokeAsync(final Channel channel, final RemotingCommand request, final long timeoutMillis,
             final InvokeCallback invokeCallback) throws InterruptedException,
             RemotingTooMuchRequestException, RemotingTimeoutException, RemotingSendRequestException;
 
-
+    /**
+     * @Description OneWay
+     * @param channel
+     * @param request
+     * @param timeoutMillis
+     * @throws InterruptedException
+     * @throws RemotingTooMuchRequestException
+     * @throws RemotingTimeoutException
+     * @throws RemotingSendRequestException
+     */
     public void invokeOneway(final Channel channel, final RemotingCommand request, final long timeoutMillis)
             throws InterruptedException, RemotingTooMuchRequestException, RemotingTimeoutException,
             RemotingSendRequestException;

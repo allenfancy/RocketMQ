@@ -54,10 +54,15 @@ import com.alibaba.rocketmq.common.help.FAQUrl;
  * @author lansheng.zj@taobao.com
  */
 public class MixAll {
+	//Home 环境
     public static final String ROCKETMQ_HOME_ENV = "ROCKETMQ_HOME";
+    //Home的目录
     public static final String ROCKETMQ_HOME_PROPERTY = "rocketmq.home.dir";
+    //NAMESRV 环境
     public static final String NAMESRV_ADDR_ENV = "NAMESRV_ADDR";
+    //NAME_SRV 地址
     public static final String NAMESRV_ADDR_PROPERTY = "rocketmq.namesrv.addr";
+    //NAME_SRV 压缩级别
     public static final String MESSAGE_COMPRESS_LEVEL = "rocketmq.message.compressLevel";
     public static final String WS_DOMAIN_NAME = System.getProperty("rocketmq.namesrv.domain",
         "jmenv.tbsite.net");
@@ -65,10 +70,14 @@ public class MixAll {
         "nsaddr");
     // http://jmenv.tbsite.net:8080/rocketmq/nsaddr
     public static final String WS_ADDR = "http://" + WS_DOMAIN_NAME + ":8080/rocketmq/" + WS_DOMAIN_SUBGROUP;
+    //默认的主题：TBW102
     public static final String DEFAULT_TOPIC = "TBW102";
     public static final String BENCHMARK_TOPIC = "BenchmarkTest";
+    //默认生产者组
     public static final String DEFAULT_PRODUCER_GROUP = "DEFAULT_PRODUCER";
+    //默认的消费组
     public static final String DEFAULT_CONSUMER_GROUP = "DEFAULT_CONSUMER";
+    //工具消费组
     public static final String TOOLS_CONSUMER_GROUP = "TOOLS_CONSUMER";
     public static final String FILTERSRV_CONSUMER_GROUP = "FILTERSRV_CONSUMER";
     public static final String MONITOR_CONSUMER_GROUP = "__MONITOR_CONSUMER";
@@ -77,11 +86,13 @@ public class MixAll {
     public static final String SELF_TEST_CONSUMER_GROUP = "SELF_TEST_C_GROUP";
     public static final String SELF_TEST_TOPIC = "SELF_TEST_TOPIC";
     public static final String OFFSET_MOVED_EVENT = "OFFSET_MOVED_EVENT";
-
+    //本地网络地址
     public static final List<String> LocalInetAddrs = getLocalInetAddress();
     public static final String Localhost = localhost();
+    //默认的编码
     public static final String DEFAULT_CHARSET = "UTF-8";
     public static final long MASTER_ID = 0L;
+    //当期JVM的PID
     public static final long CURRENT_JVM_PID = getPID();
     // 为每个Consumer Group建立一个默认的Topic，前缀 + GroupName，用来保存处理失败需要重试的消息
     public static final String RETRY_GROUP_TOPIC_PREFIX = "%RETRY%";
@@ -335,6 +346,7 @@ public class MixAll {
 
     /**
      * 将对象各成员属性值转化为Properties
+     * 
      */
     public static Properties object2Properties(final Object object) {
         Properties properties = new Properties();
@@ -404,6 +416,7 @@ public class MixAll {
                             else {
                                 continue;
                             }
+                            //设置
                             method.invoke(object, new Object[] { arg });
                         }
                     }

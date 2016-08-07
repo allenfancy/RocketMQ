@@ -58,10 +58,13 @@ import com.alibaba.rocketmq.remoting.protocol.RemotingCommand;
 
 
 /**
- * Remoting服务端实现
- * 
+ * Remoting 服务端实现
+ * @Description 继承
+ *  
  * @author shijia.wxr<vintage.wang@gmail.com>
  * @since 2013-7-13
+ * 
+ * @Description 通过Netty实现
  */
 public class NettyRemotingServer extends NettyRemotingAbstract implements RemotingServer {
     private static final Logger log = LoggerFactory.getLogger(RemotingHelper.RemotingLogName);
@@ -217,7 +220,7 @@ public class NettyRemotingServer extends NettyRemotingAbstract implements Remoti
     }
 
 
-    @Override
+    @Override//注册处理器
     public void registerProcessor(int requestCode, NettyRequestProcessor processor, ExecutorService executor) {
         ExecutorService executorThis = executor;
         if (null == executor) {
@@ -230,7 +233,7 @@ public class NettyRemotingServer extends NettyRemotingAbstract implements Remoti
     }
 
 
-    @Override
+    @Override//注册默认的处理器
     public void registerDefaultProcessor(NettyRequestProcessor processor, ExecutorService executor) {
         this.defaultRequestProcessor = new Pair<NettyRequestProcessor, ExecutorService>(processor, executor);
     }

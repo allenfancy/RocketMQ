@@ -30,15 +30,16 @@ import com.alibaba.rocketmq.remoting.protocol.RemotingCommand;
 
 
 /**
- * 通信层一些辅助方法
+ * @description		通信层一些辅助方法
  * 
  * @author shijia.wxr<vintage.wang@gmail.com>
  * @since 2013-7-13
  */
 public class RemotingHelper {
+	//通信层的日志名称
     public static final String RemotingLogName = "RocketmqRemoting";
 
-
+    
     public static String exceptionSimpleDesc(final Throwable e) {
         StringBuffer sb = new StringBuffer();
         if (e != null) {
@@ -85,6 +86,7 @@ public class RemotingHelper {
                  * FIXME The read methods in SocketChannel (and DatagramChannel)
                  * do notsupport timeouts
                  * http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4614802
+                 * 设置超时时间
                  */
                 socketChannel.socket().setSoTimeout((int) timeoutMillis);
 
@@ -179,7 +181,11 @@ public class RemotingHelper {
         }
     }
 
-
+    /**
+     * @Description 根据Channel通道，获取远程地址
+     * @param channel
+     * @return
+     */
     public static String parseChannelRemoteAddr(final Channel channel) {
         if (null == channel) {
             return "";
@@ -199,7 +205,11 @@ public class RemotingHelper {
         return "";
     }
 
-
+    /**
+     * @description		解析远程渠道名称
+     * @param channel
+     * @return
+     */
     public static String parseChannelRemoteName(final Channel channel) {
         if (null == channel) {
             return "";
@@ -223,7 +233,11 @@ public class RemotingHelper {
         return "";
     }
 
-
+    /**
+     * @description				通过SocketAddress获取Socket名称
+     * @param socketAddress
+     * @return
+     */
     public static String parseSocketAddressName(SocketAddress socketAddress) {
 
         final InetSocketAddress addrs = (InetSocketAddress) socketAddress;

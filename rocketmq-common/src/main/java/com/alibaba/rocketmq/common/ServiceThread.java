@@ -25,6 +25,7 @@ import com.alibaba.rocketmq.common.constant.LoggerName;
  * 后台服务线程基类
  * 
  * @author shijia.wxr<vintage.wang@gmail.com>
+ * @Description 后台服务线程基类
  */
 public abstract class ServiceThread implements Runnable {
     private static final Logger stlog = LoggerFactory.getLogger(LoggerName.CommonLoggerName);
@@ -45,17 +46,17 @@ public abstract class ServiceThread implements Runnable {
 
     public abstract String getServiceName();
 
-
+    //启动
     public void start() {
         this.thread.start();
     }
 
-
+    //关闭
     public void shutdown() {
         this.shutdown(false);
     }
 
-
+    //停止
     public void stop() {
         this.stop(false);
     }
@@ -66,7 +67,7 @@ public abstract class ServiceThread implements Runnable {
         stlog.info("makestop thread " + this.getServiceName());
     }
 
-
+    //停止
     public void stop(final boolean interrupt) {
         this.stoped = true;
         stlog.info("stop thread " + this.getServiceName() + " interrupt " + interrupt);
@@ -100,6 +101,7 @@ public abstract class ServiceThread implements Runnable {
 
             long beginTime = System.currentTimeMillis();
             if (!this.thread.isDaemon()) {
+            	//后台线程回收
                 this.thread.join(this.getJointime());
             }
             long eclipseTime = System.currentTimeMillis() - beginTime;

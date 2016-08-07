@@ -28,11 +28,12 @@ import com.alibaba.rocketmq.common.constant.LoggerName;
  * 
  * @author shijia.wxr<vintage.wang@gmail.com>
  * @since 2013-6-18
+ * @Description  配置管理接口
  */
 public abstract class ConfigManager {
     private static final Logger plog = LoggerFactory.getLogger(LoggerName.CommonLoggerName);
 
-
+    
     public abstract String encode();
 
 

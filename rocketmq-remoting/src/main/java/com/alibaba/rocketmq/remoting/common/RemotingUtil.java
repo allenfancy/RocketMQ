@@ -46,9 +46,11 @@ import org.slf4j.LoggerFactory;
  */
 public class RemotingUtil {
     private static final Logger log = LoggerFactory.getLogger(RemotingHelper.RemotingLogName);
+    //操作系统的名称
     public static final String OS_NAME = System.getProperty("os.name");
-
+    //是否是Linux平台
     private static boolean isLinuxPlatform = false;
+    //是否是window平台
     private static boolean isWindowsPlatform = false;
 
     static {
@@ -71,7 +73,10 @@ public class RemotingUtil {
         return isWindowsPlatform;
     }
 
-
+    /*
+     * 使用netty的Selector的选择器
+     *  Selector模式：
+     */
     public static Selector openSelector() throws IOException {
         Selector result = null;
         // 在linux平台，尽量启用epoll实现
@@ -105,7 +110,10 @@ public class RemotingUtil {
         return result;
     }
 
-
+    /**
+     * 获取本地地址
+     * @return
+     */
     public static String getLocalAddress() {
         try {
             // Traversal Network interface to get the first non-loopback and non-private address
@@ -156,7 +164,11 @@ public class RemotingUtil {
         return null;
     }
 
-
+    /**
+     * @description 根据InetAddress 类型，判断是IPV4 还是IPV6的情况划分
+     * @param localHost
+     * @return
+     */
     public static String normalizeHostAddress(final InetAddress localHost) {
         if (localHost instanceof Inet6Address) {
             return "[" + localHost.getHostAddress() + "]";
@@ -186,12 +198,22 @@ public class RemotingUtil {
         return sb.toString();
     }
 
-
+    /**
+     * 如果不指定链接超时的时间，默认设置为5S
+     * @param remote
+     * @return
+     */
     public static SocketChannel connect(SocketAddress remote) {
         return connect(remote, 1000 * 5);
     }
 
 
+    /**
+     * Socket渠道链接方法
+     * @param remote
+     * @param timeoutMillis
+     * @return
+     */
     public static SocketChannel connect(SocketAddress remote, final int timeoutMillis) {
         SocketChannel sc = null;
         try {
@@ -219,7 +241,10 @@ public class RemotingUtil {
         return null;
     }
 
-
+    /**
+     * 关闭Channel
+     * @param channel 传递进来channel
+     */
     public static void closeChannel(Channel channel) {
         final String addrRemote = RemotingHelper.parseChannelRemoteAddr(channel);
         channel.close().addListener(new ChannelFutureListener() {

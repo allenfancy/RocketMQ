@@ -34,8 +34,9 @@ import com.alibaba.rocketmq.remoting.protocol.RemotingCommand;
  * @since 2013-7-13
  */
 public class NettyDecoder extends LengthFieldBasedFrameDecoder {
+	
     private static final Logger log = LoggerFactory.getLogger(RemotingHelper.RemotingLogName);
-    private static final int FRAME_MAX_LENGTH = //
+    private static final int FRAME_MAX_LENGTH = //最大的长度
             Integer.parseInt(System.getProperty("com.rocketmq.remoting.frameMaxLength", "8388608"));
 
 
@@ -46,6 +47,7 @@ public class NettyDecoder extends LengthFieldBasedFrameDecoder {
 
     @Override
     public Object decode(ChannelHandlerContext ctx, ByteBuf in) throws Exception {
+    	//从Netty的ByteBuf 中获取到对应非阻塞IO流，再去解码
         ByteBuf frame = null;
         try {
             frame = (ByteBuf) super.decode(ctx, in);
@@ -54,11 +56,11 @@ public class NettyDecoder extends LengthFieldBasedFrameDecoder {
             }
 
             ByteBuffer byteBuffer = frame.nioBuffer();
-
+            
             return RemotingCommand.decode(byteBuffer);
         } catch (Exception e) {
             log.error("decode exception, " + RemotingHelper.parseChannelRemoteAddr(ctx.channel()), e);
-            RemotingUtil.closeChannel(ctx.channel());
+            RemotingUtil.closeChannel(ctx.channel());//关闭Channel通道
         } finally {
             if (null != frame) {
                 frame.release();

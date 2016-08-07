@@ -17,7 +17,7 @@ package com.alibaba.rocketmq.common;
 
 /**
  * Topic过滤方式，默认为单TAG过滤
- * 
+ * 目前只支持单个TAG过滤
  * @author shijia.wxr<vintage.wang@gmail.com>
  */
 public enum TopicFilterType {

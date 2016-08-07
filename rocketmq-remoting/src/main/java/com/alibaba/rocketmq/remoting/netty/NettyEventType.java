@@ -16,14 +16,18 @@
 package com.alibaba.rocketmq.remoting.netty;
 
 /**
- * Netty产生的事件类型
+ * @Description Netty事件枚举
  * 
  * @author shijia.wxr<vintage.wang@gmail.com>
  * @since 2013-7-13
  */
 public enum NettyEventType {
+	//链接类型
     CONNECT,
+    //关闭类型
     CLOSE,
+    //空闲
     IDLE,
+    //异常
     EXCEPTION
 }

@@ -51,3 +51,31 @@ RocketMQ是一款分布式、队列模型的消息中间件，具有以下特点
 如果您对互联网技术架构感兴趣，请不要犹豫，发简历给我 `shijia.wxr@taobao.com`
 
 
+说明：
+	rocket-broker:
+			store
+			remoting
+			client
+			srvutil
+	rocket-client:
+			common
+	rocket-common:
+			rometing
+	rocket-filtersrv:
+			client
+			store
+			srvutil
+	rocket-namesrv
+			srvutil
+	rocket-rometing:
+			netty fastjson
+	rocket-srvutil:
+			remoting
+			common
+	rocket-store:
+			common
+	rocket-tools:
+			client
+			store
+			srvutil
+

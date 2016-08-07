@@ -27,6 +27,7 @@ import com.alibaba.rocketmq.remoting.protocol.RemotingSerializable;
  */
 public class DataVersion extends RemotingSerializable {
     private long timestatmp = System.currentTimeMillis();
+    //原子的方式更新Long的类
     private AtomicLong counter = new AtomicLong(0);
 
 

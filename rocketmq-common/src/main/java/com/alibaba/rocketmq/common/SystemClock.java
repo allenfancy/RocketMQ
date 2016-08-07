@@ -48,10 +48,16 @@ public class SystemClock {
             @Override
             public Thread newThread(Runnable runnable) {
                 Thread thread = new Thread(runnable, "System Clock");
-                thread.setDaemon(true);
+                thread.setDaemon(true); //设置为后台线程
                 return thread;
             }
         });
+        /**
+         * @param command the task to execute   执行的命名
+         * @param initialDelay the time to delay first execution 第一次推迟执行时间
+         * @param period the period between successive executions 后续的执行周期性
+         * @param unit the time unit of the initialDelay and period parameters 时间的执行的单位 
+         */
         scheduler.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {

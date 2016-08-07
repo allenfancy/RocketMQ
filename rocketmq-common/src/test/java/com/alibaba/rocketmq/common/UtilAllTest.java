@@ -9,6 +9,11 @@ import org.junit.Test;
 
 
 public class UtilAllTest {
+	
+	@Test
+	public void test_getPid(){
+		System.out.println(UtilAll.getPid());
+	}
 
     @Test
     public void test_currentStackTrace() {

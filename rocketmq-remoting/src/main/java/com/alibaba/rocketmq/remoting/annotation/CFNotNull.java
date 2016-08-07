@@ -24,7 +24,7 @@ import java.lang.annotation.Target;
 
 /**
  * 表示字段不允许为空
- * 
+ * 标识字段不允许为空
  * @author shijia.wxr<vintage.wang@gmail.com>
  * @since 2013-7-13
  */

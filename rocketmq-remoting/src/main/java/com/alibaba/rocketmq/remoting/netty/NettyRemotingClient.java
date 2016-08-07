@@ -67,7 +67,7 @@ import com.alibaba.rocketmq.remoting.protocol.RemotingCommand;
 
 
 /**
- * Remoting客户端实现
+ * Remoting 客户端实现
  * 
  * @author shijia.wxr<vintage.wang@gmail.com>
  * @since 2013-7-13
@@ -607,8 +607,7 @@ public class NettyRemotingClient extends NettyRemotingAbstract implements Remoti
                 new Pair<NettyRequestProcessor, ExecutorService>(processor, executorThis);
         this.processorTable.put(requestCode, pair);
     }
-
-
+   
     @Override
     public RemotingCommand invokeSync(String addr, final RemotingCommand request, long timeoutMillis)
             throws InterruptedException, RemotingConnectException, RemotingSendRequestException,

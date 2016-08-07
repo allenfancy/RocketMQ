@@ -18,6 +18,7 @@ package com.alibaba.rocketmq.remoting.netty;
 /**
  * @author shijia.wxr<vintage.wang@gmail.com>
  * @since 2013-7-13
+ * @description 	netty客户端配置
  */
 public class NettyClientConfig {
     /**
@@ -27,12 +28,15 @@ public class NettyClientConfig {
     private int clientCallbackExecutorThreads = Runtime.getRuntime().availableProcessors();
     private int clientOnewaySemaphoreValue = NettySystemConfig.ClientOnewaySemaphoreValue;
     private int clientAsyncSemaphoreValue = NettySystemConfig.ClientAsyncSemaphoreValue;
+    //链接超时时间
     private long connectTimeoutMillis = 3000;
+    //通道不激活时间间隔
     private long channelNotActiveInterval = 1000 * 60;
 
     /**
      * IdleStateEvent will be triggered when neither read nor write was performed for
      * the specified period of this time. Specify {@code 0} to disable
+     * 
      */
     private int clientChannelMaxIdleTimeSeconds = 120;
 

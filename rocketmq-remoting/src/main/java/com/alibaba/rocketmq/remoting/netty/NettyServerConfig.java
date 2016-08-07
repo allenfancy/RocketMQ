@@ -22,16 +22,25 @@ package com.alibaba.rocketmq.remoting.netty;
  * @since 2013-7-13
  */
 public class NettyServerConfig {
+	//监听端口
     private int listenPort = 8888;
+    //服务端工作线程
     private int serverWorkerThreads = 8;
+    //服务端回调线程数
     private int serverCallbackExecutorThreads = 0;
+    //服务端Selector线程数
     private int serverSelectorThreads = 3;
+    //服务端OneWay信号量值
     private int serverOnewaySemaphoreValue = 256;
+    //服务端异步信号量的值
     private int serverAsyncSemaphoreValue = 64;
+    //服务端渠道最大空闲时间
     private int serverChannelMaxIdleTimeSeconds = 120;
-
+    //服务端Socket发送Buffer的大小：65535
     private int serverSocketSndBufSize = NettySystemConfig.SocketSndbufSize;
+    //服务端Socket接收Buffer的大小:65535
     private int serverSocketRcvBufSize = NettySystemConfig.SocketRcvbufSize;
+    //
     private boolean serverPooledByteBufAllocatorEnable = false;
 
 

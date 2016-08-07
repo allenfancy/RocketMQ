@@ -19,14 +19,17 @@ import io.netty.channel.Channel;
 
 
 /**
- * Netty产生的各种事件
+ *@Description Netty产生的各种事件
  * 
  * @author shijia.wxr<vintage.wang@gmail.com>
  * @since 2013-7-13
  */
 public class NettyEvent {
+	//Netty事件类型
     private final NettyEventType type;
+    //远程地址
     private final String remoteAddr;
+    //Netty通道
     private final Channel channel;
 
 

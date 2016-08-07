@@ -17,22 +17,27 @@ package com.alibaba.rocketmq.common;
 
 /**
  * @author shijia.wxr<vintage.wang@gmail.com>
+ * 服务的状态
  */
 public enum ServiceState {
     /**
      * Service just created,not start
+     * 创建，未开始
      */
     CREATE_JUST,
     /**
      * Service Running
+     * 运行
      */
     RUNNING,
     /**
      * Service shutdown
+     * 关闭
      */
     SHUTDOWN_ALREADY,
     /**
      * Service Start failure
+     * 失败
      */
     START_FAILED;
 }

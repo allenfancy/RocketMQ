@@ -21,15 +21,20 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Base class for background thread
- *
+ * 后台线程的基本类
  * @author shijia.wxr<vintage.wang@gmail.com>
  * @since 2013-7-13
  */
 public abstract class ServiceThread implements Runnable {
+	//日志
     private static final Logger stlog = LoggerFactory.getLogger(RemotingHelper.RemotingLogName);
+    //线程
     protected final Thread thread;
+    //线程回收时间，默认90S
     private static final long JoinTime = 90 * 1000;
+    //是否通知
     protected volatile boolean hasNotified = false;
+    //是否停止
     protected volatile boolean stoped = false;
 
 
@@ -37,31 +42,31 @@ public abstract class ServiceThread implements Runnable {
         this.thread = new Thread(this, this.getServiceName());
     }
 
-
+    //获取服务名称
     public abstract String getServiceName();
 
-
+    //线程启动
     public void start() {
         this.thread.start();
     }
 
-
+    //线程关闭
     public void shutdown() {
         this.shutdown(false);
     }
 
-
+    //线程停止
     public void stop() {
         this.stop(false);
     }
 
-
+    //
     public void makeStop() {
         this.stoped = true;
         stlog.info("makestop thread " + this.getServiceName());
     }
 
-
+    
     public void stop(final boolean interrupt) {
         this.stoped = true;
         stlog.info("stop thread " + this.getServiceName() + " interrupt " + interrupt);
@@ -84,7 +89,7 @@ public abstract class ServiceThread implements Runnable {
         synchronized (this) {
             if (!this.hasNotified) {
                 this.hasNotified = true;
-                this.notify();
+                this.notify(); //
             }
         }
 

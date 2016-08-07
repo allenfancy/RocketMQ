@@ -3,8 +3,6 @@ package com.alibaba.rocketmq.common;
 import java.net.InetAddress;
 import java.util.List;
 
-import junit.framework.Assert;
-
 import org.junit.Test;
 
 
@@ -17,7 +15,13 @@ public class MixAllTest {
     public void test() throws Exception {
         List<String> localInetAddress = MixAll.getLocalInetAddress();
         String local = InetAddress.getLocalHost().getHostAddress();
-        Assert.assertTrue(localInetAddress.contains("127.0.0.1"));
-        Assert.assertTrue(localInetAddress.contains(local));
+        System.out.println(localInetAddress);
+        System.out.println(local);
+    }
+    
+    @Test
+    public void testCreateBrokerId(){
+    	long brokerId = MixAll.createBrokerId("192.168.1.174", 8080);
+    	System.out.println(brokerId);
     }
 }

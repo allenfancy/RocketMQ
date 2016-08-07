@@ -23,5 +23,9 @@ import com.alibaba.rocketmq.remoting.exception.RemotingCommandException;
  * @since 2013-7-13
  */
 public interface CommandCustomHeader {
+	/**
+	 * @description 			检测客户请求头的字段
+	 * @throws RemotingCommandException
+	 */
     void checkFields() throws RemotingCommandException;
 }

@@ -24,15 +24,19 @@ import com.alibaba.rocketmq.common.constant.PermName;
  * @author shijia.wxr<vintage.wang@gmail.com>
  */
 public class TopicConfig {
+	//默认读队列的数量
     public static int DefaultReadQueueNums = 16;
+    //默认的写队列的数量
     public static int DefaultWriteQueueNums = 16;
-
+    //空格分隔符
     private static final String SEPARATOR = " ";
-
+    //主题名称
     private String topicName;
     private int readQueueNums = DefaultReadQueueNums;
     private int writeQueueNums = DefaultWriteQueueNums;
+    //
     private int perm = PermName.PERM_READ | PermName.PERM_WRITE;
+    //默认主题过滤类型
     private TopicFilterType topicFilterType = TopicFilterType.SINGLE_TAG;
     private int topicSysFlag = 0;
     private boolean order = false;

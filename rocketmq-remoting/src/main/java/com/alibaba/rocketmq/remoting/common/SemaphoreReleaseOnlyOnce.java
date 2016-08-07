@@ -37,6 +37,7 @@ public class SemaphoreReleaseOnlyOnce {
 
     public void release() {
         if (this.semaphore != null) {
+        	//如果released.compareAndSet(false,true):先比较released是否为false，然后将其值改为true，然后释放
             if (this.released.compareAndSet(false, true)) {
                 this.semaphore.release();
             }

@@ -21,11 +21,13 @@ import com.alibaba.fastjson.JSON;
 
 
 /**
- *
+ * @description	远程序列化，使用FastJson ，toJson 和  fromJson
  * @author shijia.wxr<vintage.wang@gmail.com>
  * @since 2013-7-13
+ * 
  */
 public abstract class RemotingSerializable {
+	
     public String toJson() {
         return toJson(false);
     }
@@ -35,17 +37,30 @@ public abstract class RemotingSerializable {
         return toJson(this, prettyFormat);
     }
 
-
+    /**
+     * @description	将Object转为String
+     * @param obj
+     * @param prettyFormat
+     * @return
+     */
     public static String toJson(final Object obj, boolean prettyFormat) {
         return JSON.toJSONString(obj, prettyFormat);
     }
 
-
+    /**
+     * @description 		将String转为Object类型
+     * @param json			字符串
+     * @param classOfT	    需要转换的类型
+     * @return
+     */
     public static <T> T fromJson(String json, Class<T> classOfT) {
         return JSON.parseObject(json, classOfT);
     }
 
-
+    /**
+     * @description		编码
+     * @return
+     */
     public byte[] encode() {
         final String json = this.toJson();
         if (json != null) {
@@ -54,7 +69,11 @@ public abstract class RemotingSerializable {
         return null;
     }
 
-
+    /**
+     * 按字符编码为"UTF-8",编码为二进制
+     * @param obj
+     * @return
+     */
     public static byte[] encode(final Object obj) {
         final String json = toJson(obj, false);
         if (json != null) {
@@ -63,7 +82,12 @@ public abstract class RemotingSerializable {
         return null;
     }
 
-
+    /**
+     * @description		将data字节码转为对象
+     * @param data
+     * @param classOfT
+     * @return
+     */
     public static <T> T decode(final byte[] data, Class<T> classOfT) {
         final String json = new String(data, Charset.forName("UTF-8"));
         return fromJson(json, classOfT);
